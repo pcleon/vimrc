@@ -62,8 +62,6 @@ set showcmd
 "自动补全命令时候使用菜单式起配列表
 set wildmenu
 
-"快速缩进？
-set smartindent
 
 "自动补全
 "pydiction 1.2 python auto complete
@@ -73,6 +71,16 @@ let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 "defalut g:pydiction_menu_height == 15
 ""let g:pydiction_menu_height = 20
 
+"新py文件自动加头部注释
+function HeaderPython()
+    call setline(1, "#!/usr/bin/env python")
+    call append(1, "# -*- coding: utf-8 -*-")
+    call append(2, "# Pw @ " . strftime('%Y-%m-%d %T', localtime()))
+    normal G
+    normal o
+    normal o
+endf
+autocmd bufnewfile *.py call HeaderPython()
 
 "自定义快捷键"
 set pastetoggle=<F10>
